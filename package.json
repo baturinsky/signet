@@ -1,0 +1,29 @@
+{
+  "name": "timeless",
+  "version": "1.0.0",
+  "description": "Timeless",
+  "author": "@baturinsky",
+  "type": "module",
+  "scripts": {
+    "start": "yarn vite",
+    "build": "yarn vite build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.17.14",
+    "preact": "^10.5.4",
+    "preact-router": "^3.2.1",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.5.0"
+  },
+  "dependencies": {
+    "css-tooltip": "^0.3.4",
+    "howler": "^2.2.4",
+    "htm": "^3.1.1",
+    "is-mobile": "^5.0.0",
+    "node-unrar-js": "^2.0.2",
+    "vite": "^7.1.9",
+    "vite-plugin-glsl": "^1.5.3",
+    "vite-plugin-singlefile": "^2.3.0"
+  }
+}
