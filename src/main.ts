@@ -85,7 +85,7 @@ function init() {
     n.highlight = true;
   }*/
 
-  mainStar.neighbors(2).forEach(n => n.connected = them)
+  mainStar.neighbors(1).forEach(n => n.connected = them)
   mainStar.connected = us
   for (let t of teams) {
     t.score = stars.filter(s => s.connected == t).length

@@ -166,7 +166,7 @@ export function render() {
     if (selectedCard?.canBeUsedOn(s) /*&& (!pointedStar || !selectedCard?.canBeUsedOn(pointedStar))*/) {
       let n = selectedCard.wouldConnect(s).length;
       //drawCircleHere("#fff", .01)
-      ctx.font = "0.018px Verdana"
+      ctx.font = "0.016pt Verdana"
       ctx.fillStyle = "#fff8";
       if (n > 0)
         ctx.fillText(`${n}`, 0, -0.01)
