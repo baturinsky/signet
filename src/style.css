@@ -1,0 +1,359 @@
+mainbody {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+/*for ios*/
+@namespace svg url(http://www.w3.org/2000/svg);
+
+svg|a {
+  -webkit-touch-callout: none;
+}
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  font-size: 1vh;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+details,
+main {
+  display: block;
+}
+
+hr {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+a {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+img {
+  border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[type="button"],
+[type="reset"],
+[type="submit"],
+button {
+  -webkit-appearance: button;
+}
+
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner,
+button::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring,
+button:-moz-focusring {
+  outline: ButtonText dotted 1px;
+}
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+legend {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+textarea {
+  overflow: auto;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+summary {
+  display: list-item;
+}
+
+[hidden],
+template {
+  display: none;
+}
+
+
+@font-face {
+  font-family: Rune;
+  font-weight: 700;
+  src: url(./FutharkGothic-MpvB.otf);
+}
+
+
+/*============================*/
+
+html {
+  font-size: 1svh;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  overflow: hidden;
+  background-color: #000;
+  /*background-image:
+    linear-gradient(-45deg, #fff 5%, transparent 5%, transparent 50%, #fff 50%, #fff 55%, transparent 55%);*/
+  background-size: 3px 3px;
+}
+
+body {}
+
+#main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  /*perspective: 800px;*/
+}
+
+#center {
+  aspect-ratio: 1;
+  width: min(70vw, 90vh);
+  padding-top: 2vh;
+}
+
+#game-canvas {
+  aspect-ratio: 1;
+  width: min(100%);
+  /*transform: rotate3d(1, 0, 0, 30deg);*/
+}
+
+.controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2rem;
+  font-size: 2rem;
+}
+
+.buttons {}
+
+.current {
+  background: #fff;
+}
+
+#tooltip {
+  position: fixed;
+  background: #0004;
+  padding: 5px;
+  top: 0;
+  left: 0;
+  color: #fff;
+  width: 200px;
+  text-shadow: 1px 1px 0px #000;
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  user-select: none;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.card {
+  border: solid 3px #000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0px #000;
+  font-size: 12px;
+  background: #fff;
+  padding: 10px;
+  min-height: 10vh;
+  margin-bottom: 10px;
+  text-align: center;
+  max-width: 250px;
+  cursor: pointer;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.card.fresh {
+  animation: appear 1s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: stretch;
+  height: 100%;
+  opacity: 70%;
+}
+
+.team button{
+  margin-top: 1vh;
+  animation: appear 1s infinite alternate;
+}
+
+button {
+  width: 100%;
+  background: #fff;
+  font-size: 2vh;
+  cursor: pointer;
+  padding: 2vh;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.team.playing {
+  opacity: 1;
+}
+
+.team-head {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 2vh;
+  font-size: 2vh;
+  padding: 5px;
+  border: 3px solid #fff;
+}
+
+.team-head h4 {
+  margin: 0;
+}
+
+
+.card .color {
+  text-shadow: 1px 1px 0px #0004;
+}
+
+.card * {
+  pointer-events: none;
+}
+
+.card.current {
+  transform: scale(1.15);
+}
+
+
+.card h4 {
+  font-size: 16px;
+  margin: 0 0 5px 0;
+}
+
+@keyframes appear {
+  from {
+    transform: scale(0.8);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}

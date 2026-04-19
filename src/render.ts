@@ -1,3 +1,5 @@
+import './style.css';
+
 import { cardDescriptions, cardIcons, freshCard, removeFreshCard } from "./Card";
 import { bestMove, colorblindMode, theirTurn, links, pointedStar, pointerDown, pointerMove, selectedCard, stars, teams, them, us, rng } from "./main";
 import { starRGBs } from "./Star";
