@@ -1,4 +1,4 @@
-import { rng } from "./main";
+import { rng, them, us } from "./main";
 import { render } from "./render";
 import { same, Star, StarKind, StarProbabilities, StarProbabilitiesWithoutGreen } from "./Star";
 import { Team } from "./Team";
@@ -7,7 +7,7 @@ import { randomListElement, weightedRandomO } from "./utils";
 export type CardKind = "1away" | "2awaySameColor" | "distant";
 export let freshCard: Card[] = [];
 
-export function removeFreshCard(){
+export function removeFreshCard() {
 }
 
 export const cardDescriptions = {
@@ -66,7 +66,7 @@ export class Card {
 
 
   wouldConnect(star: Star | null) {
-    if(!star)
+    if (!star)
       return []
     let list: Star[] = []
     if (!this.canBeUsedOn(star))
@@ -93,8 +93,12 @@ export class Card {
       this.owner.score++;
     }
 
-    this.owner.cards = this.owner.cards.filter(c => c != this)
-    this.owner.drawCards();
+    this.owner.cards = this.owner.cards.filter(c => c != this);
+    //(this.owner == us ? them : us).drawCards();
+    //setTimeout(() => {
+      this.owner.drawCards()
+    //}, this.owner == us ? 500 : 0)
+
     return;
   }
 }

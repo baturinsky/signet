@@ -22,6 +22,7 @@ export let bestMove: {
   card: Card | null;
   target: Star | null;
   added: number;
+  captures: Star[]
 } = { added: 0 } as any;
 
 export let rng = RNG(galNum);
@@ -107,7 +108,6 @@ export function pointerDown(e: PointerEvent) {
   console.log(pointedStar);
 
 
-
   if (theirTurn)
     return;
 
@@ -116,9 +116,13 @@ export function pointerDown(e: PointerEvent) {
       selectedCard.play(pointedStar);
       selectedCard = null
       theirTurn = true;
-      bestMove = them.bestMove();
-      render()
-      freshCard.length = 0;
+      render();
+      setTimeout(() => {
+        bestMove = them.bestMove();
+        acceptTheirMove();
+        render()
+        freshCard.length = 0;
+      }, 1000)
     }
   }
 }
@@ -126,10 +130,10 @@ export function pointerDown(e: PointerEvent) {
 export function acceptTheirMove() {
   if (bestMove.target)
     bestMove.card?.play(bestMove.target);
-  bestMove.card = null;
-  bestMove.target = null;
-  theirTurn = false; 
-  render() 
+  //bestMove.card = null;
+  //bestMove.target = null;
+  theirTurn = false;
+  render()
   freshCard.length = 0;
 }
 
@@ -167,7 +171,7 @@ export function pointerMove(e: PointerEvent) {
       tt.style.display = "none"
     }
   }
-  if(!theirTurn)
+  if (!theirTurn)
     render()
 }
 

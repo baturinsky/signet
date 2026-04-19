@@ -24,7 +24,7 @@ export class Team {
   }
 
   bestMove() {
-    let best: { card: Card, target: Star, added: number } = { added: 0 } as any;
+    let best: { card: Card, target: Star, added: number, captures:Star[] } = { added: 0 } as any;
     for (let c of this.cards) {
       for (let s of stars) {
         let wc = c.wouldConnect(s);
@@ -32,6 +32,7 @@ export class Team {
           best.added = wc.length;
           best.card = c;
           best.target = s;
+          best.captures = wc;
         }
       }
     }

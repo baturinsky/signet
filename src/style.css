@@ -279,7 +279,7 @@ body {}
 }
 
 .card.fresh {
-  animation: appear 1s;
+  /*animation: appear-up 1s;*/
 }
 
 .card:hover {
@@ -356,4 +356,22 @@ button:hover {
   to {
     transform: scale(1);
   }
+}
+
+@keyframes appear-up {
+  from {
+    transform: translateY(2vh);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+
+.played-title{
+  color: #f0f;
+  font-size: 2vh;
+  margin-bottom: 0.5vh;
+  text-align: center;
 }

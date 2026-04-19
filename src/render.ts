@@ -1,9 +1,10 @@
 import './style.css';
 
-import { cardDescriptions, cardIcons, freshCard, removeFreshCard } from "./Card";
+import { Card, cardDescriptions, cardIcons, freshCard, removeFreshCard } from "./Card";
 import { bestMove, colorblindMode, theirTurn, links, pointedStar, pointerDown, pointerMove, selectedCard, stars, teams, them, us, rng } from "./main";
 import { starRGBs } from "./Star";
 import { drawCircle, rgbtoStyle, RNG } from "./utils";
+import { len, norm, sub, sum, Vec2 } from './v';
 
 export let canvasSize = 0;
 
@@ -33,6 +34,20 @@ export function generateBackground() {
 
 const bg = generateBackground();
 
+function cardRender(card: Card) {
+  let desc: string = cardDescriptions[card.kind];
+  let colorStyle = rgbtoStyle(starRGBs[card.starKind]);
+  let colorText = `<span class="color" style="color:${colorStyle}">${card.starKind}</span>`
+  desc = desc.replaceAll("COLOR", colorText)
+
+  return `<div style="border-color:${colorStyle}" class="card ${freshCard.includes(card) ? "fresh" : ""} 
+        ${card == selectedCard ? "current" : ""}" data-card="${card.id}">
+      <h4 style="color:${colorStyle}">${cardIcons[card.kind]}</h4>
+        ${desc}
+      </div>`
+
+}
+
 export function render() {
   for (let i of [0, 1]) {
     let team = teams[i];
@@ -49,19 +64,11 @@ export function render() {
       <h4 style="color:${team == us ? "#0a0" : "#f0f"}">${team == us ? "Us" : "Them"}</h4>
       Score: ${team.score}
       </div> <div class="team-cards">` +
-      team.cards.map(card => {
-        let desc: string = cardDescriptions[card.kind];
-        let colorStyle = rgbtoStyle(starRGBs[card.starKind]);
-        let colorText = `<span class="color" style="color:${colorStyle}">${card.starKind}</span>`
-        desc = desc.replaceAll("COLOR", colorText)
-
-        return `<div style="border-color:${colorStyle}" class="card ${freshCard.includes(card) ? "fresh" : ""} 
-        ${card == selectedCard || card == bestMove.card ? "current" : ""}" data-card="${card.id}">
-      <h4 style="color:${colorStyle}">${cardIcons[card.kind]}</h4>
-        ${desc}
-      </div>`
-      }).join(' ')
-      + (team == them && theirTurn ? "<button id='ok'>Accept opponent move</button>" : "")
+      team.cards.map(card => cardRender(card)).join(' ')
+      + (team == them && bestMove.card ? 
+        `<div class="played-title">Played:</div> ${cardRender(bestMove.card)}`
+         : "")
+      //+ (team == them && theirTurn ? "<button id='ok'>Accept opponent move</button>" : "")
       + "</div>"
   }
 
@@ -95,13 +102,32 @@ export function render() {
     ctx.stroke();
   }
 
+  let foo = theirTurn ? bestMove.target : pointedStar;
+
   let wc = pointedStar ? selectedCard?.wouldConnect(pointedStar) : null;
 
   if (theirTurn) {
     wc = bestMove.card?.wouldConnect(bestMove.target);
   }
 
+  let myMove = { team: us, star: pointedStar, card: selectedCard, captures: selectedCard?.wouldConnect(pointedStar) }
+  let theirMove = { team: them, star: bestMove.target, card: bestMove.card, captures: bestMove.captures }
+
   for (let s of stars) {
+
+    for (let move of [myMove, theirMove]) {
+      if (move.star && move.captures?.includes(s)) {
+        ctx.strokeStyle = move.team == them ? "#f0f" : "#0f0";
+        ctx.lineWidth = 0.001;
+        let d = sub(s.at, move.star.at)
+        d = norm(d, len(d) - 0.007);
+        ctx.beginPath()
+        ctx.moveTo(...move.star.at)
+        ctx.lineTo(...sum(move.star.at, d))
+        ctx.stroke()
+      }
+    }
+
 
     ctx.fillStyle = s.fillStyle;
     ctx.translate(s.at[0], s.at[1]);
@@ -119,7 +145,7 @@ export function render() {
       ctx.lineWidth = 0.003
       ctx.beginPath();
       ctx.moveTo(0.01, 0);
-      ctx.lineTo(0.1, 0);
+      ctx.lineTo(0.05, 0);
       ctx.moveTo(0.01, 0);
       ctx.lineTo(0.02, 0.01);
       ctx.moveTo(0.01, 0);
@@ -146,8 +172,11 @@ export function render() {
         ctx.fillText(`${n}`, 0, -0.01)
     }
 
-    if (wc?.includes(s)) {
-      drawCircleHere("#fff", .012)
+    for (let move of [myMove, theirMove]) {
+      if (move.captures?.includes(s)) {
+        ctx.lineWidth = 0.001
+        drawCircleHere(move.team == them ? "#f0f" : "#0f0", .007)
+      }
     }
 
     if (colorblindMode) {
@@ -176,3 +205,4 @@ function drawCircleHere(color: string, r: number = .01, arc = false) {
 canvas.addEventListener("pointermove", pointerMove)
 
 canvas.addEventListener("pointerdown", pointerDown)
+
